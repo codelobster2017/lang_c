@@ -2,25 +2,34 @@ double big_pi;
 long long int lngint;
 
 #include <stdio.h>
-#include <locale.h>
+#include <inttypes.h>
 
 
 int main(int argc, char ** argv){
-	setlocale(LC_ALL, "Rus");
-	printf("Задача 1. Сумма трех чисел\n");
 	
-	int a, b, c;
+	int a, b, c, d, e, max, min;
+	
+	printf("1. Max\n");
+	scanf("%d %d %d %d %d", &a, &b, &c, &d, &e);
+	
+	max = ((((a > b ? a : b) 
+		> c ? (a > b ? a : b) : c) 
+			> d ? ((a > b ? a : b) > c ? (a > b ? a : b) : c) : d)
+				> e ? (((a > b ? a : b) > c ? (a > b ? a : b) : c) > d ? ((a > b ? a : b) > c ? (a > b ? a : b) : c) : d) : e);
+	printf("%d\n", max);  
+	
+	printf("2. Min\n");
+	scanf("%d %d %d %d %d", &a, &b, &c, &d, &e);
+	min = ((((a < b ? a : b) 
+		< c ? (a < b ? a : b) : c) 
+			< d ? ((a < b ? a : b) < c ? (a < b ? a : b) : c) : d)
+				< e ? (((a < b ? a : b) < c ? (a < b ? a : b) : c) < d ? ((a < b ? a : b) < c ? (a < b ? a : b) : c) : d) : e);
+	printf("%d\n", min);  
+	
+	printf("3. Growth\n");
 	scanf("%d %d %d", &a, &b, &c);
-	printf("%d+%d+%d=%d\n", a, b, c, a+b+c);
-	
-	printf("Задача 2. Сумма и произведение трех чисел\n");
-	
-	scanf("%d %d %d", &a, &b, &c);
-	printf("%d+%d+%d=%d\n", a, b, c, a+b+c);
-	printf("%d*%d*%d=%d\n", a, b, c, a*b*c);
-	
-	printf("Задача 3. Разность двух чисел\n");
-	
-	scanf("%d %d", &a, &b);
-	printf("%d",a-b);
+	if(a < b && b < c) 
+		printf("YES\n");
+	else
+		printf("NO\n"); 
 }

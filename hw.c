@@ -3,33 +3,68 @@ long long int lngint;
 
 #include <stdio.h>
 #include <inttypes.h>
+#include <math.h>
 
 
 int main(int argc, char ** argv){
 	
-	int a, b, c, d, e, max, min;
+	int a, b;
 	
-	printf("1. Max\n");
-	scanf("%d %d %d %d %d", &a, &b, &c, &d, &e);
+	printf("1. The square of the number\n");
+	scanf("%d %d", &a, &b);
 	
-	max = ((((a > b ? a : b) 
-		> c ? (a > b ? a : b) : c) 
-			> d ? ((a > b ? a : b) > c ? (a > b ? a : b) : c) : d)
-				> e ? (((a > b ? a : b) > c ? (a > b ? a : b) : c) > d ? ((a > b ? a : b) > c ? (a > b ? a : b) : c) : d) : e);
-	printf("%d\n", max);  
+	if((a <= 100 && b <= 100) && (a >= -100 && b >= -100))
+	{
+		int summ = 0;
+		
+		while(a <= b){
+			summ += pow((double_t) a, 2);
+			a++;
+		}
+		printf("Summ = %d\n", summ);
+	}
 	
-	printf("2. Min\n");
-	scanf("%d %d %d %d %d", &a, &b, &c, &d, &e);
-	min = ((((a < b ? a : b) 
-		< c ? (a < b ? a : b) : c) 
-			< d ? ((a < b ? a : b) < c ? (a < b ? a : b) : c) : d)
-				< e ? (((a < b ? a : b) < c ? (a < b ? a : b) : c) < d ? ((a < b ? a : b) < c ? (a < b ? a : b) : c) : d) : e);
-	printf("%d\n", min);  
+	printf("2. Three digits\n");
+	scanf("%d", &a);
+	int count = 0;
 	
-	printf("3. Growth\n");
-	scanf("%d %d %d", &a, &b, &c);
-	if(a < b && b < c) 
+	while(a > 0)
+	{
+		a /= 10;
+		count++;
+	}
+	if(count == 3)
+	{
 		printf("YES\n");
+	}
+	else 
+	{
+		printf("NO\n");
+	}
+	
+	printf("3. Digit parity\n");
+	scanf("%d", &a);
+	
+	int8_t even = 1;
+	
+	while(a > 0)
+	{
+		
+		int f;
+		f = a % 10;
+		a /= 10;
+		if(f % 2 != 0)
+		{
+			even = 0;
+			break;
+		}
+	}
+	if (even)
+	{
+		printf("YES\n");
+	}
 	else
-		printf("NO\n"); 
+	{
+		printf("NO\n");
+	}
 }

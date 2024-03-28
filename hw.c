@@ -5,58 +5,41 @@ long long int lngint;
 #include <inttypes.h>
 #include <math.h>
 
-int amount(int num)
+void print_num(int num)
 {
-	return pow(2, num-1);
+	if(num/10 > 0)
+		print_num(num/10);
+	printf("%d ", num%10);
 }
 
-int GCF(int num1, int num2)
+void print_from_a_to_b(int a, int b)
 {
-	int i = 1;
-	int gcf;
-	while(num1 >= i && num2 >= i)
+	if(a > b)
 	{
-		if(num1 % i == 0 && num2 % i == 0)
-		{
-			gcf = i;
-		}
-		i++;
+		printf("%d ", b);
+		b+=1;
+		print_from_a_to_b(a, b);
 	}
-	return gcf;
-}
-
-int is_happy_number(int n)
-{
-	
-	int summ;
-	int multiply = 1;
-	
-	while(n > 0)
+	else if(a < b)
 	{
-		int current = n % 10;
-		summ += current;
-		multiply *= current;
-		n /= 10;
+		printf("%d ", a);
+		a+=1;
+		print_from_a_to_b(a++, b);
 	}
-	return summ == multiply;
+	else
+		printf("%d ", a);
 }
-
 
 int main(int argc, char ** argv){
 	
 	int a, b;
-	printf("1. Amount seeds\n");
+	printf("1. void print_num \n");
 	scanf("%d", &a);
-	printf("%d\n", amount(a));
+	print_num(a);
 	
 	
-	printf("2. GCF\n");
+	printf("\n2. From A to b\n");
 	scanf("%d %d", &a, &b);
-	printf("%d\n", GCF(a, b));
-	
-	
-	printf("3. Happy number\n");
-	scanf("%d", &a);
-	char* res = is_happy_number(a) ? "YES" : "NO";
-	printf("%s", res);
+	print_from_a_to_b(a, b);
+	return 0;
 }

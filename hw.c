@@ -1,45 +1,48 @@
-double big_pi;
-long long int lngint;
-
 #include <stdio.h>
 #include <inttypes.h>
 #include <math.h>
 
-void print_num(int num)
+enum {SIZE = 5};
+float average(int * a, int size)
 {
-	if(num/10 > 0)
-		print_num(num/10);
-	printf("%d ", num%10);
+	int summ = 0;
+	for(int i = 0; i < size; i++)
+	{
+		summ += a[i];
+	}
+	return summ / size;
 }
 
-void print_from_a_to_b(int a, int b)
+void scanf_in_int_array(int * arr, int size)
 {
-	if(a > b)
+	for (int i = 0; i< size; i++)
 	{
-		printf("%d ", b);
-		b+=1;
-		print_from_a_to_b(a, b);
+		scanf("%d", &arr[i]);
 	}
-	else if(a < b)
+}
+
+int min_num(int * arr, int size)
+{
+	int start = arr[0];
+	for(int i = 1; i < size; i++)
 	{
-		printf("%d ", a);
-		a+=1;
-		print_from_a_to_b(a++, b);
+		if(start > arr[i])
+			start = arr[i];
 	}
-	else
-		printf("%d ", a);
+	return start;
 }
 
 int main(int argc, char ** argv){
+	int a[5];
 	
-	int a, b;
-	printf("1. void print_num \n");
-	scanf("%d", &a);
-	print_num(a);
+	printf("1. Average\n");
+	scanf_in_int_array(a, SIZE);
+	printf("%.3f\n", average(a, SIZE));
+	
+	printf("2. Min num\n");
+	scanf_in_int_array(a, SIZE);
+	printf("%d\n", min_num(a, SIZE));
 	
 	
-	printf("\n2. From A to b\n");
-	scanf("%d %d", &a, &b);
-	print_from_a_to_b(a, b);
 	return 0;
 }

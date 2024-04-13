@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include <math.h>
+#include <string.h>
 
 
 
@@ -37,6 +38,13 @@ void printf_int_array(int * arr, int size)
 	}
 }
 
+void printf_char_array(char * arr, int size)
+{
+	for (int i = 0; i< size; i++)
+	{
+		printf("%c ", arr[i]);
+	}
+}
 
 void sort_array(int * a, int size)
 {
@@ -107,18 +115,77 @@ void even_begin(int * a, int size)
 
 
 int main(int argc, char ** argv){
-	int a[5];
-	int size = 5;
-	printf("1. Sort array\n");
-	scanf_in_int_array_unknown_size(a, &size);
-	sort_array(a, size);
-	printf_int_array(a, size);
-	printf("\n");
+	FILE *open;
+	char word1[100];
+	char word2[100];
+	int r;
+	char name[] = "file.txt";
+	char name2[] = "file1.txt";
 	
-	printf("2. Even begin\n");
-	scanf_in_int_array_unknown_size(a, &size);
-	even_begin(a, size);
-	printf_int_array(a, size);
+	open = fopen(name, "r");
+	if(open == NULL)
+		return 1;
+	
+	printf("1. input ");
+	if((r = fscanf(open, "%s %s", word1, word2))>0)
+	{
+		printf("Word1 = %s Word2 = %s\n", word1, word2);
+		char result[100];
+		int k = 0;
+		for(int i = 0; i<strlen(word1); i++)
+		{
+			int num = 0;
+			for(int j = 0; j < strlen(word2); j++)
+			{
+				
+				if(word1[i] == word2[j])
+				{
+					num++;
+				}
+				for(int n = 0; n < i; n++)
+				{
+					if(word1[i] == word1[n])
+					{
+						num++;
+					}
+				}
+				for(int n = i+1; n < strlen(word1); n++)
+				{
+					if(word1[i] == word1[n])
+					{
+						num++;
+					}
+				}
+			}
 
+			if(num == 1)
+			{
+				result[k] = word1[i];
+				k++;
+			}
+		}
+		printf("result = ");
+		printf_char_array(result, k);
+	}
+	
+	open = fopen(name2, "r");
+	if(open == NULL)
+		return 1;
+	printf("\n----------------------------------------");
+	if((r = fscanf(open, "%s", word1))>0){
+		printf("\n2. input word = %s", word1);
+		for (int i = 0; i < strlen(word1); i++)
+		{
+			if(word1[i] == 'a')
+				word1[i] = 'b';
+			else if(word1[i] == 'A')
+				word1[i] = 'B';
+			else if(word1[i] == 'b')
+				word1[i] = 'a';
+			else if(word1[i] == 'B')
+				word1[i] = 'A';
+		}
+		printf("\nresult        = %s", word1);
+	}
 	return 0;
 }

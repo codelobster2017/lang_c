@@ -136,7 +136,6 @@ void processCSVFile(int* size, struct sensor* info, char* filename, int monthFil
             
         }
     }
-    
     calculateStatistics(info, index, monthFilter);
     fclose(file);
 }
